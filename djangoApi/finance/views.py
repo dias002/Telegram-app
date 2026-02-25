@@ -15,10 +15,23 @@ class CategoryViewsets(viewsets.ModelViewSet):
         serializer.save(user=self.request.user)
     
 class ExpenceViewsets(viewsets.ModelViewSet):
-    queryset = Expence.objects.all()
     serializer_class = ExpenceSerializer
-    
+    def get_queryset(self):
+        queryset = Expence.objects.filter(user=self.request.user)
+        category_id = self.request.query_params.get('category')
+        if category_id:
+            queryset = queryset.filter(name_id=category_id)
+        return queryset
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+        
+        
 class IncomeViewsets(viewsets.ModelViewSet):
     queryset = Income.objects.all()
     serializer_class = IncomeSerializer
+    def get_queryset(self):
+        return Income.objects.filter(user=self.request.user)
+    def perform_create(self,serializer):
+        serializer.save(user=self.request.user)
+    
 # Create your views here.
