@@ -1,20 +1,20 @@
-from .models import Category, Expence,Income
-from rest_framework import serializers
 
+from .models import Category, Budget, Transaction
+from rest_framework import serializers
 
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
-        fields = '__all__'
         model = Category
-        
-        
-class ExpenceSerializer(serializers.ModelSerializer):
-    class Meta:
         fields = '__all__'
-        model = Expence
-        
-        
-class IncomeSerializer(serializers.ModelSerializer):
+
+class BudgetSerializer(serializers.ModelSerializer):
     class Meta:
+        model = Budget
         fields = '__all__'
-        model = Income
+        read_only_fields = ['user']
+
+class TransactionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Transaction
+        fields = '__all__'
+        read_only_fields = ('user',)
