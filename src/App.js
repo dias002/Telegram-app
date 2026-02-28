@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import Header from './components/header'
+import {Routes,Route} from 'react-router-dom'
+import Main from './pages/main'
+import About from './pages/about'
+import Contacts from './pages/contacts'
+import Profile from './pages/userProfile'
+import CategoryPage  from './pages/categoryPage'
+import ErrorMessage from './components/ErrorMessage';
+import { useState } from 'react';
 
 function App() {
+  const [error, setError] = useState(null);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header/>
+      <ErrorMessage error={error} />
+      <Routes>
+        <Route element={<Main/>} path='/main'/>
+        <Route element={<About/>} path='/about'/>
+        <Route element={<Contacts/>} path='/contacts'/>
+        <Route element={<Profile setError={setError} /> } path='/profile'/>
+        <Route element={<CategoryPage/>} path='/category/:id'/>
+      </Routes>
+    </>
   );
 }
 
