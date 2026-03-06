@@ -32,6 +32,13 @@ export async function createCategory(data) {
 
 
 export async function PieData(){
-    const data = await api.get("/finance/transaction/", );
-    return data.data;
+  const data = await api.get("/finance/transaction/", );
+  return data.data;
 }
+
+
+export const getExpenseStats = async (budgetId = null) => {
+  const params = budgetId ? { budget: budgetId } : {};
+  const res = await api.get("finance/stats/", { params });
+  return res.data;
+};

@@ -1,20 +1,26 @@
 import { ProfilePage } from "../api/users";
-
 import BudgetPage from "../components/budget";
 import ErrorMessage from "../components/ErrorMessage";
 
 function Profile({ setError }) {
   return (
-    <div className="flex flex-col items-center min-h-[60vh] bg-gradient-to-br from-blue-50 to-blue-200 py-10 md:py-20 md:min-h-[80vh]">
-      <div className="w-full max-w-2xl bg-white rounded-lg shadow-lg p-6 mb-8">
-        <ProfilePage />
-        <BudgetPage setError={setError }/>
-        <ErrorMessage/>
+    <div className="min-h-[calc(100vh-64px)] bg-white dark:bg-zinc-950 px-4 py-10">
+      <div className="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-[260px_1fr] gap-6 items-start">
+
+        {/* Sidebar – profile info */}
+        <div className="bg-zinc-50 dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-6 lg:sticky lg:top-24">
+          <ProfilePage />
+        </div>
+
+        {/* Main – budget */}
+        <div className="bg-zinc-50 dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-8">
+          <BudgetPage setError={setError} />
+        </div>
+
       </div>
-        
-      </div>
-    );
-  }
-  
-  export default Profile;
- 
+      <ErrorMessage />
+    </div>
+  );
+}
+
+export default Profile;
